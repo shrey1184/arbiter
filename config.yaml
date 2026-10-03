@@ -1,0 +1,38 @@
+# Map each critic to a provider/model. Swap freely without touching code.
+critics:
+  accuracy:
+    provider: openai
+    model: gpt-4o
+    temperature: 0.1
+  logic:
+    provider: anthropic
+    model: claude-sonnet-4-5   # check your account for the current model string
+    temperature: 0.1
+  completeness:
+    provider: ollama
+    model: llama3.1:8b
+    temperature: 0.1
+
+adjudicator:
+  provider: anthropic
+  model: claude-sonnet-4-5
+  temperature: 0.0
+  max_tool_calls_per_claim: 3
+
+baseline:               # single-model comparison used in eval/
+  provider: openai
+  model: gpt-4o
+
+retry:
+  max_attempts: 3
+  backoff_seconds: 2
+
+short_circuit:
+  min_score: 5
+  min_confidence: 0.8
+
+limits:
+  max_input_chars: 20000
+  batch_concurrency: 3
+
+prompt_version: "v0.1"

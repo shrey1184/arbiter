@@ -1,0 +1,11 @@
+# "No paid keys" mode: three different local models.
+critics:
+  accuracy:     {provider: ollama, model: "qwen2.5:7b",  temperature: 0.1}
+  logic:        {provider: ollama, model: "mistral:7b",  temperature: 0.1}
+  completeness: {provider: ollama, model: "llama3.1:8b", temperature: 0.1}
+adjudicator:    {provider: ollama, model: "llama3.1:8b", temperature: 0.0, max_tool_calls_per_claim: 0}
+baseline:       {provider: ollama, model: "llama3.1:8b"}
+retry:          {max_attempts: 3, backoff_seconds: 2}
+short_circuit:  {min_score: 5, min_confidence: 0.8}
+limits:         {max_input_chars: 20000, batch_concurrency: 1}
+prompt_version: "v0.1"
